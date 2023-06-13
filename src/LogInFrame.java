@@ -53,9 +53,9 @@ public class LogInFrame extends JFrame {
 
         idpwSearchBtn.setForeground(Color.WHITE);
         idpwSearchBtn.setBackground(Color.BLACK);
-        idpwSearchBtn.setSize(160,30);
-        idpwSearchBtn.setLocation(100,400);
-        //loginPanel.add(idpwSearchBtn);
+        idpwSearchBtn.setSize(200,40);
+        idpwSearchBtn.setLocation(60,350);
+        loginPanel.add(idpwSearchBtn);
 
         loginBtn.setForeground(Color.WHITE);
         loginBtn.setBackground(Color.BLACK);
