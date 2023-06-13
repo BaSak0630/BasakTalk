@@ -56,7 +56,7 @@ public class UserDAO {
             flag = false;
             System.out.println("로그인 실패 >>> " + e.toString());
         }finally {
-            dbClose();
+            //dbClose();
         }
         return flag;
     }
