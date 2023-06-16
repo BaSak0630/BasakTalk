@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.sql.*;
 
 public class UserDAO {
@@ -56,7 +57,44 @@ public class UserDAO {
             flag = false;
             System.out.println("로그인 실패 >>> " + e.toString());
         }finally {
-            //dbClose();
+            dbClose();
+        }
+        return flag;
+    }
+    boolean idDuplicatedCheck(String _i) {
+        boolean flag = false;
+
+        String id = _i;
+        String dbid;
+
+        try {
+            System.out.println("아이디 중복 확인 중");
+            String checkingStr = "SELECT USERID FROM USERINFO WHERE USERID='" +id+ "'";
+            result = stmt.executeQuery(checkingStr);
+            System.out.println("DB 접속중");
+            int count = 0;
+            while(result.next()) {
+                System.out.println("result.next 테스트 ");
+
+                dbid = result.getString("USERID");
+                if(id.equals(dbid)){
+                    flag = true;
+                    System.out.println("중복");
+                }
+                else {
+                    flag = false;
+                    System.out.println("유니크");
+                }
+                count++;
+                System.out.println(count);
+            }
+        } catch(Exception e) {
+            flag = false;
+            System.out.println("중복확인 실패 >>> " + e.toString());
+            JOptionPane.showMessageDialog(null, "중복된 아이디 입니다",
+                    "아이디 중복", JOptionPane.PLAIN_MESSAGE);
+        }finally {
+            dbClose();
         }
         return flag;
     }

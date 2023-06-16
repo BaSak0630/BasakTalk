@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class LogInFrame extends JFrame {
     private JPanel loginPanel = new JPanel();
@@ -69,53 +67,46 @@ public class LogInFrame extends JFrame {
         singUp.setLocation(60,400);
         loginPanel.add(singUp);
 
-        loginBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("로그인 시도");
-                String id = idText.getText().trim();
-                String pw = pwText.getText().trim();
+        loginBtn.addActionListener(event ->{
+            System.out.println("로그인 시도");
+            String id = idText.getText().trim();
+            String pw = pwText.getText().trim();
 
-                if (id.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "아이디를 입력해주세요", "로그인 확인!",
-                            JOptionPane.PLAIN_MESSAGE);
+            if (id.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "아이디를 입력해주세요", "로그인 확인!",
+                        JOptionPane.PLAIN_MESSAGE);
 
-                } else if (pw.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "비밀 번호를 입력해주세요", "로그인 확인!",
-                            JOptionPane.PLAIN_MESSAGE);
+            } else if (pw.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "비밀 번호를 입력해주세요", "로그인 확인!",
+                        JOptionPane.PLAIN_MESSAGE);
 
-                } else if(id != null) {
-                    if(pw != null){
-                        if(_DAO.logincheck(id,pw)){
-                            setVisible(false);
-                            JFrame mainFrame = new MainFrame();
-                            mainFrame.setVisible(true);
-                        }else {
-                            JOptionPane.showMessageDialog(null, "등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다.",
-                                    "로그인 확인!", JOptionPane.PLAIN_MESSAGE);
-                        }
+            } else if(id != null) {
+                if(pw != null){
+                    if(_DAO.logincheck(id,pw)){
+                        setVisible(false);
+                        JFrame mainFrame = new MainFrame();
+                        mainFrame.setVisible(true);
+                    }else {
+                        JOptionPane.showMessageDialog(null, "등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다.",
+                                "로그인 확인!", JOptionPane.PLAIN_MESSAGE);
                     }
-                }  else {
-                    JOptionPane.showMessageDialog(null, "등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다.",
-                            "로그인 확인!", JOptionPane.PLAIN_MESSAGE);
                 }
+            }  else {
+                JOptionPane.showMessageDialog(null, "등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다.",
+                        "로그인 확인!", JOptionPane.PLAIN_MESSAGE);
             }
         });
-        idpwSearchBtn.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e) {
+
+
+        idpwSearchBtn.addActionListener(event ->{
                 JOptionPane.showMessageDialog(null, "아이디 비번", "아이디/비밀번호 찾기",
                         JOptionPane.PLAIN_MESSAGE);
-            }
         });
 
-        singUp.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                JFrame singUpFrame = new SingUpFrame();
+        singUp.addActionListener(event->{
+                dispose();
+                JFrame singUpFrame = new SingUpFrame(_DAO);
                 singUpFrame.setVisible(true);
-            }
         });
     }
 }
