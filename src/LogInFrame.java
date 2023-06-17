@@ -105,7 +105,7 @@ public class LogInFrame extends JFrame {
 
         singUp.addActionListener(event->{
                 dispose();
-                JFrame singUpFrame = new SingUpFrame("","","","");
+                JFrame singUpFrame = new SignUpFrame();
                 singUpFrame.setVisible(true);
         });
     }
