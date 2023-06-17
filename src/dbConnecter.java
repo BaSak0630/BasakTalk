@@ -6,8 +6,10 @@ public class dbConnecter {
     String pw = "admin";
     Connection conn = null;
     Statement stmt = null;
-    ResultSet logInResult = null;
     dbConnecter(){
+
+    }
+    public Statement dbConnecting(){
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             // connection으로 db와 연결 (객체 생성)
@@ -21,6 +23,15 @@ public class dbConnecter {
             System.out.println("DB 접속실패 : " + sqle.toString());
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        return stmt;
+    }
+    public void dbClose() {
+        try {
+            if (stmt != null)
+                stmt.close();
+        } catch (Exception e) {
+            System.out.println(e + "=> dbClose fail");
         }
     }
 }

@@ -10,7 +10,15 @@ public class MainFrame extends JFrame {
         int screenWidth = d.width;
         setSize(screenWidth*2/3, screenHeight*2/3);
         setLocation(screenWidth/6, screenHeight/6);
-
         this.add(mainPanel);
+        mainPanel.setLayout(null);
+
+        JButton backButton = new JButton("<-");
+
+        backButton.setForeground(Color.WHITE);
+        backButton.setBackground(Color.BLACK);
+        backButton.setSize(40,30);
+        backButton.setLocation(0,0);
+        mainPanel.add(backButton);
     }
 }
