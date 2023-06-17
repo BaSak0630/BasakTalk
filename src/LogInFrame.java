@@ -16,8 +16,8 @@ public class LogInFrame extends JFrame {
     private JButton idpwSearchBtn = new JButton("아이디/비밀번호 찾기");
     private JButton singUp = new JButton("회원가입");
     private UserDAO _DAO;
-    LogInFrame(UserDAO DAO) {
-        _DAO = DAO;
+    LogInFrame() {
+        _DAO = new UserDAO();
 
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension d = tk.getScreenSize();
@@ -105,7 +105,7 @@ public class LogInFrame extends JFrame {
 
         singUp.addActionListener(event->{
                 dispose();
-                JFrame singUpFrame = new SingUpFrame(_DAO);
+                JFrame singUpFrame = new SingUpFrame("","","","");
                 singUpFrame.setVisible(true);
         });
     }

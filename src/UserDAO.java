@@ -7,7 +7,8 @@ public class UserDAO {
     String pw = "admin";
     Connection conn = null;
     Statement stmt = null;
-    ResultSet result = null;
+    ResultSet logInResult = null;
+
     public UserDAO(){
 
         try {
@@ -16,6 +17,7 @@ public class UserDAO {
             conn = DriverManager.getConnection(url, user, pw);
             System.out.println(conn.isClosed()?"접속종료":"접속중");
             stmt = conn.createStatement();
+            System.out.println("접속 완료");
         } catch (ClassNotFoundException cnfe) {
             System.out.println("DB 드라이버 로딩 실패 :" + cnfe.toString());
         } catch (SQLException sqle) {
@@ -35,23 +37,16 @@ public class UserDAO {
             System.out.println("로그인 시도 중");
             //String checkingStr = "INSERT INTO USERINFO values (0000000003,'userid3','userpw3','userid@gmail.com','이시현')";
             String checkingStr = "SELECT USERPW FROM USERINFO WHERE USERID='" +id+ "'";
-            result = stmt.executeQuery(checkingStr);
+            logInResult = stmt.executeQuery(checkingStr);
             System.out.println("DB 접속중");
-            int count = 0;
-            while(result.next()) {
+            while(logInResult.next()) {
                 System.out.println("result.next 테스트 ");
-
-                dbpw = result.getString("USERPW");
+                dbpw = logInResult.getString("USERPW");
                 if(pw.equals(dbpw)){
                     flag = true;
                     System.out.println("로그인 성공");
+
                 }
-                else {
-                    flag = false;
-                    System.out.println("로그인 실패");
-                }
-                count++;
-                System.out.println(count);
             }
         } catch(Exception e) {
             flag = false;
@@ -61,47 +56,34 @@ public class UserDAO {
         }
         return flag;
     }
-    boolean idDuplicatedCheck(String _i) {
-        boolean flag = false;
-
+    boolean idDUniqueCheck(String _i) {
+        boolean idflag = false;
         String id = _i;
         String dbid;
-
         try {
             System.out.println("아이디 중복 확인 중");
-            String checkingStr = "SELECT USERID FROM USERINFO WHERE USERID='" +id+ "'";
-            result = stmt.executeQuery(checkingStr);
+            String checkingStrUnique = "SELECT USERID FROM USERINFO WHERE USERID ='"+id+"'";
+            logInResult = stmt.executeQuery(checkingStrUnique);
             System.out.println("DB 접속중");
-            int count = 0;
-            while(result.next()) {
-                System.out.println("result.next 테스트 ");
-
-                dbid = result.getString("USERID");
-                if(id.equals(dbid)){
-                    flag = true;
+            while(logInResult.next()) {
+                dbid = logInResult.getString("USERID");
+                if(dbid.equals(id)){
+                    idflag = true;
                     System.out.println("중복");
+                    return idflag;
                 }
-                else {
-                    flag = false;
-                    System.out.println("유니크");
-                }
-                count++;
-                System.out.println(count);
             }
         } catch(Exception e) {
-            flag = false;
             System.out.println("중복확인 실패 >>> " + e.toString());
-            JOptionPane.showMessageDialog(null, "중복된 아이디 입니다",
-                    "아이디 중복", JOptionPane.PLAIN_MESSAGE);
         }finally {
             dbClose();
         }
-        return flag;
+        return idflag;
     }
     public void dbClose() {
         try {
-            if (result != null)
-                result.close();
+            if (logInResult != null)
+                logInResult.close();
             if (stmt != null)
                 stmt.close();
         } catch (Exception e) {
