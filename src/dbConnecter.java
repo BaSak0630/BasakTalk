@@ -5,17 +5,39 @@ public class dbConnecter {
     String user = "admin";
     String pw = "admin";
     Connection conn = null;
-    Statement stmt = null;
+    PreparedStatement stmt = null;
     dbConnecter(){
 
     }
-    public Statement dbConnecting(){
+    public PreparedStatement dbConnecting(String sql){
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             // connection으로 db와 연결 (객체 생성)
             conn = DriverManager.getConnection(url, user, pw);
             System.out.println(conn.isClosed()?"접속종료":"접속중");
-            stmt = conn.createStatement();
+            stmt = conn.prepareStatement(sql);
+            System.out.println("접속 완료");
+        } catch (ClassNotFoundException cnfe) {
+            System.out.println("DB 드라이버 로딩 실패 :" + cnfe.toString());
+        } catch (SQLException sqle) {
+            System.out.println("DB 접속실패 : " + sqle.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return stmt;
+    }
+    public PreparedStatement dbConnecting(String sql,String userID,String userPW,String userEmail,String userName){
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            // connection으로 db와 연결 (객체 생성)
+            conn = DriverManager.getConnection(url, user, pw);
+            System.out.println(conn.isClosed()?"접속종료":"접속중");
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1,userID);
+            stmt.setString(2,userPW);
+            stmt.setString(3,userEmail);
+            stmt.setString(4,userName);
+
             System.out.println("접속 완료");
         } catch (ClassNotFoundException cnfe) {
             System.out.println("DB 드라이버 로딩 실패 :" + cnfe.toString());

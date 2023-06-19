@@ -13,12 +13,18 @@ public class MainFrame extends JFrame {
         this.add(mainPanel);
         mainPanel.setLayout(null);
 
-        JButton backButton = new JButton("<-");
+        JButton backButton = new JButton("로그아웃");
 
         backButton.setForeground(Color.WHITE);
         backButton.setBackground(Color.BLACK);
-        backButton.setSize(40,30);
+        backButton.setSize(100,30);
         backButton.setLocation(0,0);
         mainPanel.add(backButton);
+
+        backButton.addActionListener(e -> {
+            LogInFrame logInFrame = new LogInFrame();
+            logInFrame.setVisible(true);
+            this.dispose();
+        });
     }
 }

@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SignUpFrame extends JFrame {
-
     boolean uniqueID = false;
     boolean pwLenght = false;
     boolean pwDuplicated = false;
@@ -12,19 +11,17 @@ public class SignUpFrame extends JFrame {
     JLabel idLabel = new JLabel("아이디 (필수)");
     JTextField idText = new JTextField();
     JLabel passwordLabel = new JLabel("비밀번호 6자리 이상입력");
-    JTextField passwordText = new JTextField();
+    JPasswordField passwordText = new JPasswordField();
     JLabel passwordCheckLabel = new JLabel("비밀번호 확인");
-    JTextField passwordCheckText = new JTextField();
+    JPasswordField passwordCheckText = new JPasswordField();
     JLabel nameLabel = new JLabel("이름");
     JTextField nameText = new JTextField();
     JLabel emailLabel = new JLabel("Email(필수)");
     JTextField emailText = new JTextField();
-
     JButton signUpbut = new JButton("회원가입");
     JButton backbut = new JButton("뒤로 가기");
     private UserDAO _DAO;
     SignUpFrame() {
-
         _DAO = new UserDAO();
 
         Toolkit tk = Toolkit.getDefaultToolkit();
@@ -149,26 +146,26 @@ public class SignUpFrame extends JFrame {
            }
            if(uniqueID && pwLenght && pwDuplicated){
                //모든 textfield가 체워지고 중복체크가 완료된 경우
-               //_DAO.signup("4",id,pw,Email,name);
+               _DAO.signup(id,pw,Email,name);
                System.out.println("유저추가");
+               LogInFrame logInFrame = new LogInFrame();
+               logInFrame.setVisible(true);
+               this.dispose();
            }
         });
+
         duplicatedbut.addActionListener(e -> {
             String id = idText.getText().trim();
-            String pw = passwordText.getText().trim();
-            String pwD = passwordCheckText.getText().trim();
-            String name = nameText.getText().trim();
-            String Email = emailText.getText().trim();
             if(!id.isEmpty()){
                 if(_DAO.idDUniqueCheck(id)) {
                     JOptionPane.showMessageDialog(null, "중복된 아이디 입니다",
                             "아이디", JOptionPane.PLAIN_MESSAGE);
-                    idText.setEditable(true);
+                    //idText.setEditable(true);
                     uniqueID = false;
                 }else if(!_DAO.idDUniqueCheck(id)){
                     JOptionPane.showMessageDialog(null, "사용가능한 아이디 입니다",
                             "아이디", JOptionPane.PLAIN_MESSAGE);
-                    idText.setEditable(false);
+                    //idText.setEditable(false);
                     uniqueID = true;
                 }
                 if(uniqueID) idText.setEditable(false);

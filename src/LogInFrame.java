@@ -80,18 +80,18 @@ public class LogInFrame extends JFrame {
                 JOptionPane.showMessageDialog(null, "비밀 번호를 입력해주세요", "로그인 확인!",
                         JOptionPane.PLAIN_MESSAGE);
 
-            } else if(id != null) {
-                if(pw != null){
+            } else if(id != null && pw != null) {{
                     if(_DAO.logincheck(id,pw)){
                         setVisible(false);
                         JFrame mainFrame = new MainFrame();
                         mainFrame.setVisible(true);
                     }else {
+                        System.out.println("로그인 실패");
                         JOptionPane.showMessageDialog(null, "등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다.",
                                 "로그인 확인!", JOptionPane.PLAIN_MESSAGE);
                     }
                 }
-            }  else {
+            } else {
                 JOptionPane.showMessageDialog(null, "등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다.",
                         "로그인 확인!", JOptionPane.PLAIN_MESSAGE);
             }
