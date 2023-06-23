@@ -1,17 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class LogInFrame extends JFrame {
     private JPanel loginPanel = new JPanel();
-
     private JLabel idLabel = new JLabel("아이디 ");
-
     private JLabel pwLabel = new JLabel("비밀번호 ");
-
     private JTextField idText = new JTextField();
-
     private JPasswordField pwText = new JPasswordField();
-
     private JButton loginBtn = new JButton("로그인");
     private JButton idpwSearchBtn = new JButton("아이디/비밀번호 찾기");
     private JButton singUp = new JButton("회원가입");
@@ -28,6 +24,7 @@ public class LogInFrame extends JFrame {
         this.setTitle("로그인");
 
         this.add(loginPanel);
+
         loginPanel.setVisible(true);
         loginPanel.setLayout(null);
 
@@ -80,16 +77,15 @@ public class LogInFrame extends JFrame {
                 JOptionPane.showMessageDialog(null, "비밀 번호를 입력해주세요", "로그인 확인!",
                         JOptionPane.PLAIN_MESSAGE);
 
-            } else if(id != null && pw != null) {{
-                    if(_DAO.logincheck(id,pw)){
+            } else if(id != null && pw != null) {
+                if(_DAO.logincheck(id,pw)){
                         setVisible(false);
                         JFrame mainFrame = new MainFrame();
                         mainFrame.setVisible(true);
-                    }else {
+                }else {
                         System.out.println("로그인 실패");
                         JOptionPane.showMessageDialog(null, "등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다.",
                                 "로그인 확인!", JOptionPane.PLAIN_MESSAGE);
-                    }
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다.",
@@ -99,8 +95,7 @@ public class LogInFrame extends JFrame {
 
 
         idpwSearchBtn.addActionListener(event ->{
-                JOptionPane.showMessageDialog(null, "아이디 비번", "아이디/비밀번호 찾기",
-                        JOptionPane.PLAIN_MESSAGE);
+            this.dispose();
         });
 
         singUp.addActionListener(event->{

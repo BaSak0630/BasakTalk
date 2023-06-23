@@ -3,7 +3,11 @@ import java.awt.*;
 
 public class MainFrame extends JFrame {
     JPanel mainPanel = new JPanel();
+    boolean logined;
     public MainFrame(){
+        logined = false;
+        this.setVisible(false);
+
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension d = tk.getScreenSize();
         int screenHeight = d.height;

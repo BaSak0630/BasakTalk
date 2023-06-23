@@ -77,6 +77,8 @@ public class UserDAO {
             result = stmt.executeQuery(query);*/
         } catch(Exception e) {
             System.out.println("유저 삽입 실패 >>> " + e.toString());
+            JOptionPane.showMessageDialog(null, "회원가입의 실패하였습니다.\n 다시 한번 확인해주세요",
+                    "회원가입", JOptionPane.PLAIN_MESSAGE);
         } finally {
             dbc.dbClose();
         }

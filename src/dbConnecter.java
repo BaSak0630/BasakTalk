@@ -18,9 +18,9 @@ public class dbConnecter {
             stmt = conn.prepareStatement(sql);
             System.out.println("접속 완료");
         } catch (ClassNotFoundException cnfe) {
-            System.out.println("DB 드라이버 로딩 실패 :" + cnfe.toString());
+            System.out.println("DB 드라이버 로딩 실패 :" + cnfe);
         } catch (SQLException sqle) {
-            System.out.println("DB 접속실패 : " + sqle.toString());
+            System.out.println("DB 접속실패 : " + sqle);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -40,9 +40,9 @@ public class dbConnecter {
 
             System.out.println("접속 완료");
         } catch (ClassNotFoundException cnfe) {
-            System.out.println("DB 드라이버 로딩 실패 :" + cnfe.toString());
+            System.out.println("DB 드라이버 로딩 실패 :" + cnfe);
         } catch (SQLException sqle) {
-            System.out.println("DB 접속실패 : " + sqle.toString());
+            System.out.println("DB 접속실패 : " + sqle);
         } catch (Exception e) {
             e.printStackTrace();
         }
