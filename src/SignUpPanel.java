@@ -131,6 +131,7 @@ public class SignUpPanel extends JPanel {
                 _DAO.signup(id,pw,Email,name);
                 System.out.println("유저추가");
                 //회원가입 완료 로그인 화면으로 이동
+                loginDialog.changePanel("loginPanel");
             }
         });
 

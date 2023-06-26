@@ -66,8 +66,9 @@ public class LoginPanel extends JPanel {
 
             } else if(id != null && pw != null) {
                 if(_DAO.logincheck(id,pw)){
-
-                    //로그인 완료
+                    loginDialog.dispose();
+                    MainFrame mainFrame = new MainFrame();
+                    mainFrame.setVisible(true);
                 }else {
                     System.out.println("로그인 실패");
                     JOptionPane.showMessageDialog(null, "등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다.",

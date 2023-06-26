@@ -2,15 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame extends JFrame {
-    MainPanel mainPanel = new MainPanel();
-    LoginDialog loginDialog = new LoginDialog();
-    boolean logined = false;
+    MainPanel mainPanel;
     public MainFrame(){
-        if(logined){
-            this.setVisible(true);
-        } else {
-            loginDialog.setVisible(true);
-        }
+        mainPanel = new MainPanel(this);
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension d = tk.getScreenSize();
         int screenHeight = d.height;

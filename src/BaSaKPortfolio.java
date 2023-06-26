@@ -1,5 +1,6 @@
 public class BaSaKPortfolio {
     public static void main(String[] args) {
-        MainFrame mainFrame = new MainFrame();
+        LoginDialog loginDialog = new LoginDialog();
+        loginDialog.setVisible(true);
     }
 }
