@@ -2,12 +2,15 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame extends JFrame {
-    JPanel mainPanel = new JPanel();
-    boolean logined;
+    MainPanel mainPanel = new MainPanel();
+    LoginDialog loginDialog = new LoginDialog();
+    boolean logined = false;
     public MainFrame(){
-        logined = false;
-        this.setVisible(false);
-
+        if(logined){
+            this.setVisible(true);
+        } else {
+            loginDialog.setVisible(true);
+        }
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension d = tk.getScreenSize();
         int screenHeight = d.height;
@@ -15,20 +18,5 @@ public class MainFrame extends JFrame {
         setSize(screenWidth*2/3, screenHeight*2/3);
         setLocation(screenWidth/6, screenHeight/6);
         this.add(mainPanel);
-        mainPanel.setLayout(null);
-
-        JButton backButton = new JButton("로그아웃");
-
-        backButton.setForeground(Color.WHITE);
-        backButton.setBackground(Color.BLACK);
-        backButton.setSize(100,30);
-        backButton.setLocation(0,0);
-        mainPanel.add(backButton);
-
-        backButton.addActionListener(e -> {
-            LogInFrame logInFrame = new LogInFrame();
-            logInFrame.setVisible(true);
-            this.dispose();
-        });
     }
 }
