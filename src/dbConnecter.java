@@ -1,7 +1,7 @@
 import java.sql.*;
 
 public class dbConnecter {
-    String url = "jdbc:oracle:thin:@localhost:1521:XE";
+    String url = "jdbc:oracle:thin:@192.168.161.1:1521:XE";
     String user = "admin";
     String pw = "admin";
     Connection conn = null;
