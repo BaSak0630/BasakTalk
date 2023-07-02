@@ -82,7 +82,7 @@ public class LoginPanel extends SubPanel {
 
 
         idpwSearchBtn.addActionListener(event ->{
-            //아이디 비번 찾기 다이얼 로그 열기
+            loginDialog.changePanel("idpwFindPanel");
         });
 
         singUp.addActionListener(event->{
