@@ -35,8 +35,34 @@ public class UserDAO {
         }
         return flag;
     }
+    boolean findingCheck(String _e){
+        boolean findFlag = false;
+        String inputEmail = _e;
+        String dbEmail;
+        try {
+            System.out.println("계정 존재 여부 확인 중");
+            String query = "SELECT USEREMAIL FROM USERINFO WHERE USEREMAIL ='"+inputEmail+"'";
+            stmt = dbc.dbConnecting(query);
+            result = stmt.executeQuery(query);
+            System.out.println("DB 접속중");
+            while(result.next()) {
+                dbEmail = result.getString("USEREMAIL");
+                if(dbEmail.equals(inputEmail)){
+                    findFlag = true;
+                    System.out.println("계정 존재");
+                    return findFlag;
+                }
+            }
+        } catch(Exception e) {
+            System.out.println("계정 여부 확인 실패 >>> " + e.toString());
+        } finally {
+            dbc.dbClose();
+        }
+
+        return findFlag;
+    }
     boolean idDUniqueCheck(String _i) {
-        boolean idflag = false;
+        boolean idFlag = false;
         String id = _i;
         String dbid;
 
@@ -49,9 +75,9 @@ public class UserDAO {
             while(result.next()) {
                 dbid = result.getString("USERID");
                 if(dbid.equals(id)){
-                    idflag = true;
+                    idFlag = true;
                     System.out.println("중복");
-                    return idflag;
+                    return idFlag;
                 }
             }
         } catch(Exception e) {
@@ -59,7 +85,7 @@ public class UserDAO {
         } finally {
             dbc.dbClose();
         }
-        return idflag;
+        return idFlag;
     }
     void signup(String ID,String PW,String email, String name){
         String userID = ID;

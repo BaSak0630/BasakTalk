@@ -12,5 +12,7 @@ public class MainFrame extends JFrame {
         setSize(screenWidth*2/3, screenHeight*2/3);
         setLocation(screenWidth/6, screenHeight/6);
         this.add(indexPanel);
+        //닫기
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 }

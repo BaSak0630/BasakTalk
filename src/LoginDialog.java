@@ -20,6 +20,9 @@ public class LoginDialog extends JDialog {
 
         this.add(loginPanel);
         this.setVisible(true);
+
+        //닫기
+        this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
     }
     public void changePanel(String pannelName){
         if(pannelName.equals("loginPanel")){

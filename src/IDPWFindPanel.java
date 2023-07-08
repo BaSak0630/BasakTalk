@@ -29,8 +29,14 @@ public class IDPWFindPanel extends SubPanel{
             if (email.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "이메일을 입력해주세요", "아이디 비밀번혼 찾기",
                         JOptionPane.PLAIN_MESSAGE);
-            } else if (email != null) {
-                
+            } else {
+                if(_DAO.findingCheck(email)){
+                    JOptionPane.showMessageDialog(null, "존재합니다.", "아이디 비밀번혼 찾기",
+                            JOptionPane.PLAIN_MESSAGE);
+                }else {
+                    JOptionPane.showMessageDialog(null, "존재하지 않는 계정입니다.", "아이디 비밀번혼 찾기",
+                            JOptionPane.PLAIN_MESSAGE);
+                }
             }
         });
     }
