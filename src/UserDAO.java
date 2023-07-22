@@ -58,7 +58,6 @@ public class UserDAO {
         } finally {
             dbc.dbClose();
         }
-
         return findFlag;
     }
     boolean idDUniqueCheck(String _i) {
@@ -109,5 +108,42 @@ public class UserDAO {
             dbc.dbClose();
         }
     }
-
+    String returnID(String _e){
+        String returnID = "";
+        String inputEmail = _e;
+        try {
+            System.out.println("계정 존재 여부 확인 중");
+            String query = "SELECT USEREMAIL,USERID,USERPW FROM USERINFO WHERE USEREMAIL ='"+inputEmail+"'";
+            stmt = dbc.dbConnecting(query);
+            result = stmt.executeQuery(query);
+            System.out.println("DB 접속중");
+            while(result.next()) {
+                returnID = result.getString("USERID");
+            }
+        } catch(Exception e) {
+            System.out.println("id 리턴 실패 >>> " + e.toString());
+        } finally {
+            dbc.dbClose();
+        }
+        return returnID;
+    }
+    String returnPW(String _e){
+        String returnPW = "";
+        String inputEmail = _e;
+        try {
+            System.out.println("계정 존재 여부 확인 중");
+            String query = "SELECT USEREMAIL,USERID,USERPW FROM USERINFO WHERE USEREMAIL ='"+inputEmail+"'";
+            stmt = dbc.dbConnecting(query);
+            result = stmt.executeQuery(query);
+            System.out.println("DB 접속중");
+            while(result.next()) {
+                returnPW = result.getString("USERID");
+            }
+        }catch (Exception e){
+            System.out.println("pw 리턴 실패 >>> " + e.toString());
+        }finally {
+            dbc.dbClose();
+        }
+        return returnPW;
+    }
 }
