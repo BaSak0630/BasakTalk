@@ -3,7 +3,7 @@ import java.sql.*;
 public class dbConnecter {
     String url = "jdbc:oracle:thin:@localhost:1521:XE";
     String user = "admin";
-    String pw = "admin";
+    String pw = "adminpw";
     Connection conn = null;
     PreparedStatement stmt = null;
     dbConnecter(){
