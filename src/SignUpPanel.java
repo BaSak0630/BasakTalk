@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class SignUpPanel extends JPanel {
+public class SignUpPanel extends SubPanel {
     boolean uniqueID = false;
     boolean pwLenght = false;
     boolean pwDuplicated = false;

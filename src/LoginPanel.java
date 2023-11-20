@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class LoginPanel extends JPanel {
+public class LoginPanel extends SubPanel {
     private JLabel idLabel = new JLabel("아이디 ");
     private JLabel pwLabel = new JLabel("비밀번호 ");
     private JTextField idText = new JTextField();
@@ -82,7 +82,7 @@ public class LoginPanel extends JPanel {
 
 
         idpwSearchBtn.addActionListener(event ->{
-            //아이디 비번 찾기 다이얼 로그 열기
+            loginDialog.changePanel("idpwFindPanel");
         });
 
         singUp.addActionListener(event->{

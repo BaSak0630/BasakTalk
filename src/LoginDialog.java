@@ -4,6 +4,7 @@ import java.awt.*;
 public class LoginDialog extends JDialog {
     private LoginPanel loginPanel;
     private SignUpPanel signUpPanel;
+    private IDPWFindPanel idpwFindPanel;
     LoginDialog() {
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension d = tk.getScreenSize();
@@ -15,9 +16,13 @@ public class LoginDialog extends JDialog {
 
         loginPanel = new LoginPanel(this);
         signUpPanel = new SignUpPanel(this);
+        idpwFindPanel = new IDPWFindPanel(this);
 
         this.add(loginPanel);
         this.setVisible(true);
+
+        //닫기
+        this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
     }
     public void changePanel(String pannelName){
         if(pannelName.equals("loginPanel")){
@@ -28,6 +33,11 @@ public class LoginDialog extends JDialog {
         }else if(pannelName.equals("signUpPanel")){
             getContentPane().removeAll();
             getContentPane().add(signUpPanel);
+            revalidate();
+            repaint();
+        }else if(pannelName.equals("idpwFindPanel")){
+            getContentPane().removeAll();
+            getContentPane().add(idpwFindPanel);
             revalidate();
             repaint();
         }
