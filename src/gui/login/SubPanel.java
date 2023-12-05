@@ -1,3 +1,5 @@
+package gui.login;
+
 import javax.swing.*;
 import java.awt.*;
 

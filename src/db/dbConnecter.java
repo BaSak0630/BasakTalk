@@ -1,3 +1,5 @@
+package db;
+
 import java.sql.*;
 
 public class dbConnecter {
@@ -6,7 +8,7 @@ public class dbConnecter {
     String pw = "adminpw";
     Connection conn = null;
     PreparedStatement stmt = null;
-    dbConnecter(){
+    public dbConnecter(){
 
     }
     public PreparedStatement dbConnecting(String sql){

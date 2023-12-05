@@ -1,3 +1,5 @@
+package gui.login;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -5,7 +7,7 @@ public class LoginDialog extends JDialog {
     private LoginPanel loginPanel;
     private SignUpPanel signUpPanel;
     private IDPWFindPanel idpwFindPanel;
-    LoginDialog() {
+    public LoginDialog() {
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension d = tk.getScreenSize();
         int screenHeight = d.height;
