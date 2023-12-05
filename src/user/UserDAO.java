@@ -1,11 +1,18 @@
+package user;
+
+/*import db.dbConnecter;*/
+
+import db.dbConnecter;
+
 import javax.swing.*;
+import java.net.InetAddress;
 import java.sql.*;
 
 public class UserDAO {
     dbConnecter dbc = new dbConnecter();
     PreparedStatement stmt = null;
     ResultSet result = null;
-    boolean logincheck(String _i, String _p) {
+    public boolean logincheck(String _i, String _p) {
         boolean flag = false;
 
         String id = _i;
@@ -14,7 +21,7 @@ public class UserDAO {
 
         try {
             System.out.println("로그인 시도 중");
-            String query = "SELECT USERPW FROM USERINFO WHERE USERID='" +id+ "'";
+            String query = "SELECT USERPW FROM BASAKTALKUSER WHERE USERID='" +id+ "'";
             stmt = dbc.dbConnecting(query);
             result = stmt.executeQuery(query);
             System.out.println("DB 접속중");
@@ -35,13 +42,13 @@ public class UserDAO {
         }
         return flag;
     }
-    boolean findingCheck(String _e){
+    public boolean findingCheck(String _e){
         boolean findFlag = false;
         String inputEmail = _e;
         String dbEmail;
         try {
             System.out.println("계정 존재 여부 확인 중");
-            String query = "SELECT USEREMAIL FROM USERINFO WHERE USEREMAIL ='"+inputEmail+"'";
+            String query = "SELECT USEREMAIL FROM BASAKTALKUSER WHERE USEREMAIL ='"+inputEmail+"'";
             stmt = dbc.dbConnecting(query);
             result = stmt.executeQuery(query);
             System.out.println("DB 접속중");
@@ -60,14 +67,14 @@ public class UserDAO {
         }
         return findFlag;
     }
-    boolean idDUniqueCheck(String _i) {
+    public boolean idDUniqueCheck(String _i) {
         boolean idFlag = false;
         String id = _i;
         String dbid;
 
         try {
             System.out.println("아이디 중복 확인 중");
-            String query = "SELECT USERID FROM USERINFO WHERE USERID ='"+id+"'";
+            String query = "SELECT USERID FROM BASAKTALKUSER WHERE USERID ='"+id+"'";
             stmt = dbc.dbConnecting(query);
             result = stmt.executeQuery(query);
             System.out.println("DB 접속중");
@@ -86,7 +93,7 @@ public class UserDAO {
         }
         return idFlag;
     }
-    void signup(String ID,String PW,String email, String name){
+    public void signup(String ID, String PW, String email, String name){
         String userID = ID;
         String userPW = PW;
         String userEmail = email;
@@ -94,7 +101,7 @@ public class UserDAO {
 
         try {
             System.out.println("아이디 중복 확인 중");
-            String query = "INSERT INTO USERINFO (USERNO,USERID,USERPW,USEREMAIL,USERNAME) values (USER_SEQ.NEXTVAL,?,?,?,?)";
+            String query = "INSERT INTO BASAKTALKUSER (NO,USERID,USERPW,USEREMAIL,USERNAME) values (USER_SEQ.NEXTVAL,?,?,?,?)";
             stmt = dbc.dbConnecting(query,userID,userPW,userEmail,userName);
             result = stmt.executeQuery();
             /*String query ="INSERT INTO USERINFO values (USER_SEQ.NEXTVAL,'"+userID+"','"+userPW+"','"+userEmail+"','"+userName+"')";
@@ -108,12 +115,12 @@ public class UserDAO {
             dbc.dbClose();
         }
     }
-    String returnID(String _e){
+    public String returnID(String _e){
         String returnID = "";
         String inputEmail = _e;
         try {
             System.out.println("계정 존재 여부 확인 중");
-            String query = "SELECT USEREMAIL,USERID,USERPW FROM USERINFO WHERE USEREMAIL ='"+inputEmail+"'";
+            String query = "SELECT USEREMAIL,USERID,USERPW FROM BASAKTALKUSER WHERE USEREMAIL ='"+inputEmail+"'";
             stmt = dbc.dbConnecting(query);
             result = stmt.executeQuery(query);
             System.out.println("DB 접속중");
@@ -127,12 +134,12 @@ public class UserDAO {
         }
         return returnID;
     }
-    String returnPW(String _e){
+    public String returnPW(String _e){
         String returnPW = "";
         String inputEmail = _e;
         try {
             System.out.println("계정 존재 여부 확인 중");
-            String query = "SELECT USEREMAIL,USERID,USERPW FROM USERINFO WHERE USEREMAIL ='"+inputEmail+"'";
+            String query = "SELECT USEREMAIL,USERID,USERPW FROM BASAKTALKUSER WHERE USEREMAIL ='"+inputEmail+"'";
             stmt = dbc.dbConnecting(query);
             result = stmt.executeQuery(query);
             System.out.println("DB 접속중");
@@ -146,4 +153,48 @@ public class UserDAO {
         }
         return returnPW;
     }
+    public User findUser(String id){
+        User user = new User();
+        try {
+            System.out.println("로그인 성공 후 User정보 가져오기");
+            String query = "SELECT * FROM BASAKTALKUSER WHERE USERID ='"+id+"'";
+            stmt = dbc.dbConnecting(query);
+            result = stmt.executeQuery(query);
+            System.out.println("DB 접속중");
+            while(result.next()) {
+                user.set_userNum(result.getInt("NO"));
+                user.set_userID(result.getString("USERID"));
+                user.set_userPW(result.getString("USERPW"));
+                user.set_userEmail(result.getString("USEREMAIL"));
+                user.set_ip(result.getString("IP"));
+                if(result.getInt("SERVER")==0){
+                    user.set_server(true);
+                }else {
+                    user.set_server(false);
+                }
+
+            }
+        } catch(Exception e) {
+            System.out.println("중복확인 실패 >>> " + e.toString());
+        } finally {
+            dbc.dbClose();
+        }
+        return user;
+    }
+
+    public void ipSet(String id) {
+        try {
+            InetAddress address = InetAddress.getLocalHost();
+            String myIP = address.getHostAddress();
+            String query = "UPDATE BASAKTALKUSER SET IP ='"+myIP+"'WHERE USERID ='"+id+"'";
+            stmt = dbc.dbConnecting(query);
+            result = stmt.executeQuery(query);
+            System.out.println("DB 접속중");
+        } catch(Exception e) {
+            System.out.println("중복확인 실패 >>> " + e.toString());
+        } finally {
+            dbc.dbClose();
+        }
+    }
 }
+

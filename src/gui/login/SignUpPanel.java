@@ -1,3 +1,7 @@
+package gui.login;
+
+import user.UserDAO;
+
 import javax.swing.*;
 import java.awt.*;
 

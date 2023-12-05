@@ -1,5 +1,11 @@
+package gui.login;
+
+import gui.net.MainFrame;
+import user.UserDAO;
+
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class LoginPanel extends SubPanel {
     private JLabel idLabel = new JLabel("아이디 ");
@@ -67,8 +73,11 @@ public class LoginPanel extends SubPanel {
             } else if(id != null && pw != null) {
                 if(_DAO.logincheck(id,pw)){
                     loginDialog.dispose();
-                    MainFrame mainFrame = new MainFrame();
+                    _DAO.ipSet(id);
+                    MainFrame mainFrame = null;
+                    mainFrame = new MainFrame(_DAO.findUser(id));
                     mainFrame.setVisible(true);
+
                 }else {
                     System.out.println("로그인 실패");
                     JOptionPane.showMessageDialog(null, "등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다.",
@@ -89,5 +98,12 @@ public class LoginPanel extends SubPanel {
             //회원가입 판넬로 바꿈
             loginDialog.changePanel("signUpPanel");
         });
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        Image logo = Toolkit.getDefaultToolkit().getImage("src/img/Logoicon.png");
+        super.paintComponent(g);
+        g.drawImage(logo,100,50,100,100,this);
     }
 }

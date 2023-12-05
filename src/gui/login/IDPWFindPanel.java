@@ -1,7 +1,11 @@
+package gui.login;
+
+import user.UserDAO;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class IDPWFindPanel extends SubPanel{
+public class IDPWFindPanel extends SubPanel {
     private JLabel emailLabel = new JLabel("이메일을 입력하세요");
     private JTextField emailTextField = new JTextField();
     private JButton findBut = new JButton("아이디 비밀번호 찾기");
