@@ -100,13 +100,12 @@ public class UserDAO {
         String userName = name;
 
         try {
-            System.out.println("아이디 중복 확인 중");
-            String query = "INSERT INTO BASAKTALKUSER (USERNUM,USERID,USERPW,USEREMAIL,USERNAME) values (NO,?,?,?,?)";
+            System.out.println("회원가입 여부 확인 중");
+            String query = "INSERT INTO BASAKTALKUSER(USERNUM,USERID,USERPW,USEREMAIL,USERNAME) values ((select nextval('test_sequence') from dual),?,?,?,?)";
+            //INSERT INTO `BasakTalk`.`BASAKTALKUSER` (`USERNUM`, `userid`, `userpw`, `userEmail`, `username`) VALUES ('1', 'userid1', 'userpw1', 'userid1@gmail.com', '김동혁');
             stmt = dbc.dbConnecting(query,userID,userPW,userEmail,userName);
-            result = stmt.executeQuery();
-            /*String query ="INSERT INTO USERINFO values (USER_SEQ.NEXTVAL,'"+userID+"','"+userPW+"','"+userEmail+"','"+userName+"')";
-            stmt = dbc.dbConnecting(query);
-            result = stmt.executeQuery(query);*/
+            stmt.execute();
+            //String query ="INSERT INTO USERINFO values (create_sequence,'"+userID+"','"+userPW+"','"+userEmail+"','"+userName+"')";
         } catch(Exception e) {
             System.out.println("유저 삽입 실패 >>> " + e.toString());
             JOptionPane.showMessageDialog(null, "회원가입의 실패하였습니다.\n 다시 한번 확인해주세요",

@@ -2,7 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$/../../project/VisibleSorting" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../../project/WelCheck_Backend/BackEnd" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../24_Winter" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../BaekJoonProblems" vcs="Git" />
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
