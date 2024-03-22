@@ -39,20 +39,14 @@ public class LoginPanel extends SubPanel {
         this.add(pwText);
 
 
-        idpwSearchBtn.setForeground(Color.WHITE);
-        idpwSearchBtn.setBackground(Color.BLACK);
         idpwSearchBtn.setSize(200,40);
         idpwSearchBtn.setLocation(60,350);
         this.add(idpwSearchBtn);
 
-        loginBtn.setForeground(Color.WHITE);
-        loginBtn.setBackground(Color.BLACK);
         loginBtn.setSize(200,40);
         loginBtn.setLocation(60,250);
         this.add(loginBtn);
 
-        singUp.setForeground(Color.WHITE);
-        singUp.setBackground(Color.BLACK);
         singUp.setSize(200,40);
         singUp.setLocation(60,400);
         this.add(singUp);

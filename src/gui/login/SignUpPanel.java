@@ -42,8 +42,6 @@ public class SignUpPanel extends SubPanel {
         idText.setLocation(15,80);
         this.add(idText);
 
-        duplicatedbut.setForeground(Color.WHITE);
-        duplicatedbut.setBackground(Color.BLACK);
         duplicatedbut.setSize(85,28);
         duplicatedbut.setLocation(230,80);
         this.add(duplicatedbut);
@@ -82,14 +80,10 @@ public class SignUpPanel extends SubPanel {
         emailText.setLocation(15,310);
         this.add(emailText);
 
-        signUpbut.setForeground(Color.WHITE);
-        signUpbut.setBackground(Color.BLACK);
         signUpbut.setSize(100,30);
         signUpbut.setLocation(115,380);
         this.add(signUpbut);
 
-        backbut.setForeground(Color.WHITE);
-        backbut.setBackground(Color.BLACK);
         backbut.setSize(100,30);
         backbut.setLocation(115,420);
         this.add(backbut);

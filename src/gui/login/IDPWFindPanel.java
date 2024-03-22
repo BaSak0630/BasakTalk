@@ -3,7 +3,6 @@ package gui.login;
 import user.UserDAO;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class IDPWFindPanel extends SubPanel {
     private JLabel emailLabel = new JLabel("이메일을 입력하세요");
@@ -25,14 +24,10 @@ public class IDPWFindPanel extends SubPanel {
 
         findBut.setSize(200,30);
         findBut.setLocation(60,220);
-        findBut.setForeground(Color.WHITE);
-        findBut.setBackground(Color.BLACK);
         this.add(findBut);
 
         backBut.setSize(200,30);
         backBut.setLocation(60,300);
-        backBut.setForeground(Color.WHITE);
-        backBut.setBackground(Color.BLACK);
         this.add(backBut);
 
         findBut.addActionListener(e -> {

@@ -3,9 +3,9 @@ package db;
 import java.sql.*;
 
 public class dbConnecter {
-    String url = "jdbc:oracle:thin:@localhost:1521:XE";
-    String user = "admin";
-    String pw = "adminpw";
+    String url = "jdbc:mysql://localhost:3306/BasakTalk";
+    String user = "root";
+    String pw = "rootpass";
     Connection conn = null;
     PreparedStatement stmt = null;
     public dbConnecter(){
@@ -13,7 +13,7 @@ public class dbConnecter {
     }
     public PreparedStatement dbConnecting(String sql){
         try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Class.forName("com.mysql.jdbc.Driver");
             // connection으로 db와 연결 (객체 생성)
             conn = DriverManager.getConnection(url, user, pw);
             System.out.println(conn.isClosed()?"접속종료":"접속중");
@@ -30,7 +30,7 @@ public class dbConnecter {
     }
     public PreparedStatement dbConnecting(String sql,String userID,String userPW,String userEmail,String userName){
         try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Class.forName("com.mysql.jdbc.Driver");
             // connection으로 db와 연결 (객체 생성)
             conn = DriverManager.getConnection(url, user, pw);
             System.out.println(conn.isClosed()?"접속종료":"접속중");

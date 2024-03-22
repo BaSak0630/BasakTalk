@@ -101,7 +101,7 @@ public class UserDAO {
 
         try {
             System.out.println("아이디 중복 확인 중");
-            String query = "INSERT INTO BASAKTALKUSER (NO,USERID,USERPW,USEREMAIL,USERNAME) values (USER_SEQ.NEXTVAL,?,?,?,?)";
+            String query = "INSERT INTO BASAKTALKUSER (USERNUM,USERID,USERPW,USEREMAIL,USERNAME) values (NO,?,?,?,?)";
             stmt = dbc.dbConnecting(query,userID,userPW,userEmail,userName);
             result = stmt.executeQuery();
             /*String query ="INSERT INTO USERINFO values (USER_SEQ.NEXTVAL,'"+userID+"','"+userPW+"','"+userEmail+"','"+userName+"')";
